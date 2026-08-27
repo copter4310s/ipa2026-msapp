@@ -33,8 +33,7 @@ def add_router():
 @app.route("/delete", methods=["POST"])
 def delete_router():
     try:
-        ip = int(request.form.get("id"))
-        mycol.delete_one({"_id": ObjectId(id)})
+        mycol.delete_one({"_id": ObjectId(request.form.get("id"))})
     except Exception:
         pass
     return redirect(url_for("main"))
