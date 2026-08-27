@@ -13,6 +13,7 @@ db_name    = os.environ.get("DB_NAME")
 client = MongoClient(mongo_uri)
 mydb = client[db_name]
 mycol = mydb["routers"]
+table_interfaces = mydb["interface_status"]
 
 app = Flask(__name__)
 
@@ -37,6 +38,13 @@ def delete_router():
     except Exception:
         pass
     return redirect(url_for("main"))
+
+@app.route("/router/<ip>", methods=["GET"])
+def get_interface(ip):
+    interface_list = table_interfaces.find({"router_ip": ip})
+    render_data = {"ip": ip, "data": interface_list}
+
+    return render_template("interfaces.html", data=render_data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
