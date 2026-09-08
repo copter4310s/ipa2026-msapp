@@ -41,8 +41,9 @@ def delete_router():
 
 @app.route("/router/<ip>", methods=["GET"])
 def get_interface(ip):
-    interface_list = table_interfaces.find({"router_ip": ip})
+    interface_list = table_interfaces.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
     render_data = {"ip": ip, "data": interface_list}
+    print(f"The Data is: {render_data}")
 
     return render_template("interfaces.html", data=render_data)
 
