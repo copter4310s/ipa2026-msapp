@@ -8,7 +8,9 @@ import os
 
 def get_message():
     host = "rabbitmq"
-    credentials = pika.PlainCredentials("admin", os.environ.get("RABBITMQ_DEFAULT_PASS"))
+    credentials = pika.PlainCredentials(
+        "admin", os.environ.get("RABBITMQ_DEFAULT_PASS")
+    )
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host, 5672, "/", credentials)
     )
