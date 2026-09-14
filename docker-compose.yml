@@ -38,6 +38,9 @@ services:
       MONGO_URI: "mongodb://${MONGO_INITDB_ROOT_USERNAME}:${MONGO_INITDB_ROOT_PASSWORD}@mongo:27017/"
       DB_NAME: "ipa2026_db"
       RABBITMQ_URI: "rabbitmq"
+    deploy:
+        mode: replicated
+        replicas: 3
 
   mongo:
     image: mongo:6
