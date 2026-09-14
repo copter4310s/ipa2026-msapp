@@ -1,7 +1,8 @@
 from database import insert_router_interfaces
 from get_interfaces import get_interfaces
-import os
-import time, pika, json
+import time
+import pika
+import json
 
 
 def get_message():
