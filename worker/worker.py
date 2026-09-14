@@ -3,11 +3,12 @@ from get_interfaces import get_interfaces
 import time
 import pika
 import json
+import os
 
 
 def get_message():
     host = "rabbitmq"
-    credentials = pika.PlainCredentials("admin", "y90:SU28i{u@")
+    credentials = pika.PlainCredentials("admin", os.environ.get("RABBITMQ_DEFAULT_PASS"))
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host, 5672, "/", credentials)
     )
