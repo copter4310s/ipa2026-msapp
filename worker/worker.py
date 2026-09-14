@@ -7,7 +7,7 @@ import json
 
 def get_message():
     host = "rabbitmq"
-    credentials = pika.PlainCredentials("admin", "rabbitmq")
+    credentials = pika.PlainCredentials("admin", "y90:SU28i{u@")
     connection = pika.BlockingConnection(
         pika.ConnectionParameters(host, 5672, "/", credentials)
     )
