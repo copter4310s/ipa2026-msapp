@@ -8,6 +8,7 @@ import os
 
 def get_message():
     host = "rabbitmq"
+    print(f"RABBITMQ PASS: {os.environ.get("RABBITMQ_DEFAULT_PASS")}")
     credentials = pika.PlainCredentials(
         "admin", os.environ.get("RABBITMQ_DEFAULT_PASS")
     )
