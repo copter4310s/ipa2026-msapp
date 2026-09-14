@@ -42,11 +42,11 @@ jobs:
 
     - name: Build & Push Docker Images
       run: |
-        docker build -t copter4310s/worker:latest ./worker
-        docker build -t copter4310s/scheduler:latest ./scheduler
-        docker build -t copter4310s/web:latest ./web
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/worker:latest ./worker
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/scheduler:latest ./scheduler
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/web:latest ./web
 
-        docker push copter4310s/worker:latest
-        docker push copter4310s/scheduler:latest
-        docker push copter4310s/web:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/worker:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/scheduler:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/web:latest
 
