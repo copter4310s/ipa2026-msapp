@@ -1,5 +1,6 @@
 from netmiko import ConnectHandler
 
+
 def get_interfaces(ip, username, password):
     router = {
         "device_type": "cisco_ios",
