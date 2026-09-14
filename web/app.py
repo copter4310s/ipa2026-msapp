@@ -7,8 +7,8 @@ from bson import ObjectId
 from pymongo import MongoClient
 import os
 
-mongo_uri  = os.environ.get("MONGO_URI")
-db_name    = os.environ.get("DB_NAME")
+mongo_uri = os.environ.get("MONGO_URI")
+db_name = os.environ.get("DB_NAME")
 
 client = MongoClient(mongo_uri)
 mydb = client[db_name]
@@ -17,9 +17,11 @@ table_interfaces = mydb["interface_status"]
 
 app = Flask(__name__)
 
+
 @app.route("/")
 def main():
     return render_template("index.html", data=mycol.find())
+
 
 @app.route("/add", methods=["POST"])
 def add_router():
@@ -28,8 +30,9 @@ def add_router():
     password = request.form.get("password")
 
     if ip and username and password:
-        mycol.insert_one({ "ip": ip, "username": username, "password": password })
+        mycol.insert_one({"ip": ip, "username": username, "password": password})
     return redirect(url_for("main"))
+
 
 @app.route("/delete", methods=["POST"])
 def delete_router():
@@ -39,14 +42,17 @@ def delete_router():
         pass
     return redirect(url_for("main"))
 
+
 @app.route("/router/<ip>", methods=["GET"])
 def get_interface(ip):
-    interface_list = table_interfaces.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
+    interface_list = (
+        table_interfaces.find({"router_ip": ip}).sort("timestamp", -1).limit(3)
+    )
     render_data = {"ip": ip, "data": interface_list}
     print(f"The Data is: {render_data}")
 
     return render_template("interfaces.html", data=render_data)
 
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080)
-
