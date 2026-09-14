@@ -3,11 +3,11 @@ import os
 
 
 def produce(host, body):
-    credentials = pika.PlainCredentials("admin", "rabbitmq")
+    credentials = pika.PlainCredentials(
+        "admin", os.environ.get("RABBITMQ_DEFAULT_PASS")
+    )
     connection = pika.BlockingConnection(
-        pika.ConnectionParameters(
-            host, 5672, "/", os.environ.get("RABBITMQ_DEFAULT_PASS")
-        )
+        pika.ConnectionParameters(host, 5672, "/", credentials)
     )
     channel = connection.channel()
 
